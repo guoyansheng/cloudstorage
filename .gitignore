@@ -1,0 +1,85 @@
+.DS_Store 
+# intellij
+.idea
+
+# Eclipse
+.classpath
+.project
+.setting
+*.class
+*.dump
+*.orig
+*.log
+*.log.1
+*.iml
+*.ipr
+*.iws
+*.net1
+*.net2
+*.net
+*.test
+*.dev
+*.prod
+
+# mvn
+target
+bin
+test-output
+
+# 前段打包
+dist
+_dist
+node_modules/
+spm_modules/
+sea_modules/
+coverage/
+mocks_data/
+uiweb/
+logs/
+*-run
+npm-debug.log
+jars/
+app/proxy*
+assembly/
+.idea
+run/
+.react_entries
+.chair-react/
+config/map.json
+.tmlayout*.html
+app/proxy_class_map.js
+mocks_data/proxy/**/_*
+
+
+
+#   后面都是从网上抄来的
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+/.settings/  
+/target/  
+/log/
+# built application files  
+*.apk  
+*.ap_  
+  
+# files for the dex VM  
+*.dex
+
+
+ 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:jaxws="http://cxf.apache.org/jaxws" 
+		xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+    
+    <!-- 有点儿类似JDK的形式  参数address是访问地址  implementor是实现者(最开始测试可以使用服务类com.itcast.ws.CXFService，但是后面和spring配置文件整合的时候就㤇使用bean的#ID了)-->
+    <!--此xml文件在WEB-INF下，这样配置-->
+    <!--<jaxws:endpoint implementor="com.itcast.ws.CXFService" address="/hello"/>-->
+    
+    
+
+
+	<!-- 有点儿类似JDK的形式  参数address是访问地址  implementor是实现者(最开始测试可以使用服务类com.itcast.ws.CXFService，但是后面和spring配置文件整合的时候就㤇使用bean的#ID了)-->
+    <!-- http://localhost:8080/name3Artifact/cxf/cxfService?wsdl -->
+    <jaxws:endpoint implementor="#cxfService" address="/cxfService"/>
+    <!-- 方便本应用自己调用 -->
+    <bean id="cxfService" class="com.huawei.cloudstoragews.service.CXFServiceImpl"></bean>
+    
+    
+    <!-- 这是Spring基础了，把服务类放进来，给spring管理 -->
+    <!-- <import resource="beans.xml"/>  -->
+</beans>
+ 

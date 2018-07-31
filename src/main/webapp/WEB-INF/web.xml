@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance
+	http://www.springmodules.org/schema/cache/springmodules-cache.xsd
+	http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+        id="WebApp_ID" version="2.5">
+
+  <display-name>SSM configuration</display-name>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/WEB-INF/classes/log4j.properties</param-value>
+  </context-param>
+  <!-- 解决工程编码过滤器 -->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <description>
+    </description>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.huawei.cloudstorage.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/LoginFilter</url-pattern>
+  </filter-mapping>
+
+  <!-- 配置文件所在位置 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-service.xml,classpath:mybatis-spring.xml</param-value>
+  </context-param>
+  <!-- Spring配置（监听器） -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- SpringMVC配置 -->
+  <servlet>
+    <servlet-name>springDispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springDispatcherServlet</servlet-name>
+    <url-pattern>*.htm</url-pattern>
+    <url-pattern>*.json</url-pattern>
+  </servlet-mapping>
+
+  <!-- CXF和servlet整合 只管理路径为cxf(/cxf/*)下的内容 走一下源码就知道它会找cxf-servlet.xml文件 -->
+  <servlet>
+    <servlet-name>cxf</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+    <!-- 如果cxf-servlet.xml在web-inf下的话，就不用配置，但是如果在src下需要配置一下 名字为什么是config-location，看看CXFservlet源码就知道了。 -->
+    <init-param>
+      <param-name>config-location</param-name>
+      <param-value>classpath:cxf-ws-beans.xml</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <!-- 访问WSDL文件的时候就需要访问这个名字，通过它可以找到web服务 -->
+    <servlet-name>cxf</servlet-name>
+    <url-pattern>/cxf/*</url-pattern>
+  </servlet-mapping>
+
+
+  <filter>
+    <filter-name>simplelogin</filter-name>
+    <filter-class>com.huawei.cloudstorage.filter.LoginFilter</filter-class>
+    <init-param>
+      <param-name>hello</param-name>
+      <param-value>hello filter</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>simplelogin</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

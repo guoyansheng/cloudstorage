@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huawei.cloudstorage.dal.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.huawei.cloudstorage.dal.modelDo.UserInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="login_name_email" property="loginNameEmail" jdbcType="VARCHAR" />
+    <result column="login_name_mobile" property="loginNameMobile" jdbcType="VARCHAR" />
+    <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="payment_password" property="paymentPassword" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+    <result column="cert_No" property="certNo" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="mobile_no" property="mobileNo" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthdate" property="birthdate" jdbcType="DATE" />
+    <result column="constellation" property="constellation" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="SMALLINT" />
+    <result column="income" property="income" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="SMALLINT" />
+    <result column="weight" property="weight" jdbcType="SMALLINT" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="interest" property="interest" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="gmt_first" property="gmtFirst" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, login_name_email, login_name_mobile, login_password, payment_password, 
+    nick_name, real_name, cert_type, cert_No, state, address, native_place, phone, mobile_no, 
+    email, birthdate, constellation, age, income, height, weight, job, interest, introduce, 
+    note, gmt_first, gmt_create, gmt_modify
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from do_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from do_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huawei.cloudstorage.dal.modelDo.UserInfo" >
+    insert into do_user_info (id, user_id, login_name_email, 
+      login_name_mobile, login_password, payment_password, 
+      nick_name, real_name, cert_type, 
+      cert_No, state, address, 
+      native_place, phone, mobile_no, 
+      email, birthdate, constellation, 
+      age, income, height, 
+      weight, job, interest, 
+      introduce, note, gmt_first, 
+      gmt_create, gmt_modify)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{loginNameEmail,jdbcType=VARCHAR}, 
+      #{loginNameMobile,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, #{paymentPassword,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, 
+      #{certNo,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{nativePlace,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{birthdate,jdbcType=DATE}, #{constellation,jdbcType=VARCHAR}, 
+      #{age,jdbcType=SMALLINT}, #{income,jdbcType=INTEGER}, #{height,jdbcType=SMALLINT}, 
+      #{weight,jdbcType=SMALLINT}, #{job,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{gmtFirst,jdbcType=TIMESTAMP}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.cloudstorage.dal.modelDo.UserInfo" >
+    insert into do_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="loginNameEmail != null" >
+        login_name_email,
+      </if>
+      <if test="loginNameMobile != null" >
+        login_name_mobile,
+      </if>
+      <if test="loginPassword != null" >
+        login_password,
+      </if>
+      <if test="paymentPassword != null" >
+        payment_password,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="certType != null" >
+        cert_type,
+      </if>
+      <if test="certNo != null" >
+        cert_No,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mobileNo != null" >
+        mobile_no,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="birthdate != null" >
+        birthdate,
+      </if>
+      <if test="constellation != null" >
+        constellation,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="interest != null" >
+        interest,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="gmtFirst != null" >
+        gmt_first,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginNameEmail != null" >
+        #{loginNameEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="loginNameMobile != null" >
+        #{loginNameMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null" >
+        #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentPassword != null" >
+        #{paymentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=DATE},
+      </if>
+      <if test="constellation != null" >
+        #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=SMALLINT},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=SMALLINT},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=SMALLINT},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null" >
+        #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtFirst != null" >
+        #{gmtFirst,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huawei.cloudstorage.dal.modelDo.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from do_user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.cloudstorage.dal.modelDo.UserInfo" >
+    update do_user_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginNameEmail != null" >
+        login_name_email = #{loginNameEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="loginNameMobile != null" >
+        login_name_mobile = #{loginNameMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null" >
+        login_password = #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentPassword != null" >
+        payment_password = #{paymentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        cert_type = #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null" >
+        cert_No = #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        birthdate = #{birthdate,jdbcType=DATE},
+      </if>
+      <if test="constellation != null" >
+        constellation = #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=SMALLINT},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=INTEGER},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=SMALLINT},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=SMALLINT},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null" >
+        interest = #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtFirst != null" >
+        gmt_first = #{gmtFirst,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.cloudstorage.dal.modelDo.UserInfo" >
+    update do_user_info
+    set user_id = #{userId,jdbcType=VARCHAR},
+      login_name_email = #{loginNameEmail,jdbcType=VARCHAR},
+      login_name_mobile = #{loginNameMobile,jdbcType=VARCHAR},
+      login_password = #{loginPassword,jdbcType=VARCHAR},
+      payment_password = #{paymentPassword,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      cert_type = #{certType,jdbcType=VARCHAR},
+      cert_No = #{certNo,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      birthdate = #{birthdate,jdbcType=DATE},
+      constellation = #{constellation,jdbcType=VARCHAR},
+      age = #{age,jdbcType=SMALLINT},
+      income = #{income,jdbcType=INTEGER},
+      height = #{height,jdbcType=SMALLINT},
+      weight = #{weight,jdbcType=SMALLINT},
+      job = #{job,jdbcType=VARCHAR},
+      interest = #{interest,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      gmt_first = #{gmtFirst,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

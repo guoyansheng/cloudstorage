@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolbox>
+<!-- 资料参考： https://blog.csdn.net/mingtianhaiyouwo/article/details/52233903 -->
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
+    <tool>
+        <key>dateUtil</key>
+        <scope>application</scope>
+        <class>com.huawei.cloudstorage.util.DateUtil</class>
+    </tool>
+</toolbox>
