@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.huawei.cloudstorage.dal.modelDo.Person;
 import com.huawei.cloudstorage.service.PersonService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Administrator
@@ -46,27 +47,14 @@ public class PersonController extends BaseController {
         return "showperson.jsp";
     }
     @RequestMapping("/test.json")
-    public void test(ModelMap model, HttpServletResponse response){
+    @ResponseBody
+    public Map<String,Object> test(ModelMap model, HttpServletResponse response){
         List<Person> persons = personService.loadPersons();
+        Map<String,Object> map = new HashMap<>();
+        map.put("persons", persons);
         model.addAttribute("persons", persons);
         logger.info("日志打印测试！");
         logger.error("日志打印测试！");
-        Map<String,Object> jsonMap = new HashMap<String,Object>();
-
-        try {
-            //璁剧疆椤甸潰涓嶇紦瀛�
-            response.setContentType("application/json");
-            response.setHeader("Pragma", "No-cache");
-            response.setHeader("Cache-Control", "no-cache");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter out= null;
-            out = response.getWriter();
-            out.print(model);
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
+        return map;
     }
 }

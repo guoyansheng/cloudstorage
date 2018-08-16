@@ -11,7 +11,8 @@
      http://www.springframework.org/schema/mvc  
      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd  
      ">
-
+    <!--启动注解； 使用@ResponseBody 时需要启动-->
+    <mvc:annotation-driven/>
     <!-- 启用spring mvc 注解 -->
     <context:annotation-config />
     
